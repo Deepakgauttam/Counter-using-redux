@@ -1,23 +1,26 @@
+// redux/reducers/counter.js
 import { ADD_COUNTER, SUB_COUNTER, RESET_COUNTER } from "../actions/actions.types";
 
-const initalState = {
+const initialState = {
   amount: 0,
-  name: "Deepak"
+  name: "Deepak",
 };
 
-const counter = (state = initalState, action) => {
+const counter = (state = initialState, action) => {
   switch (action.type) {
     case ADD_COUNTER:
       return {
-        amount: action.count
+        ...state,
+        amount: state.amount + 1,
       };
-      case SUB_COUNTER:
-        return {
-          amount: action.count
-        };
+    case SUB_COUNTER:
+      return {
+        ...state,
+        amount: state.amount > 0 ? state.amount - 1 : 0,
+      };
     case RESET_COUNTER:
       return {
-        amount: action.count
+        amount: 0
       };
     default:
       return state;
